@@ -20,5 +20,11 @@ public class RegionRestController {
         return ListRegioner;
     }
 
+    // add PostMapping for Regioner
+
+    // add PutMapping for Regioner
+
+    // add DeleteMapping for Regioner
+
 
 }

@@ -18,4 +18,10 @@ public class KommuneRestController {
     public List<Kommune> getKommuner() {
         return apiServiceGetKommuner.getKommuner();
     }
+
+    // add PostMapping for Kommuner
+
+    // add PutMapping for Kommuner
+
+    // add DeleteMapping for kommuner
 }
