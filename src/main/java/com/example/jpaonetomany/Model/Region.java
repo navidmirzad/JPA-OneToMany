@@ -15,7 +15,7 @@ public class Region {
     private String navn;
     private String href;
 
-    @OneToMany(mappedBy = "region")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "region")
     @JsonBackReference
     private Set<Kommune> kommuner = new HashSet<>();
 
