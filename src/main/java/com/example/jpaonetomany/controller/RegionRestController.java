@@ -37,7 +37,9 @@ public class RegionRestController {
     public ResponseEntity<String> deleteRegion(@PathVariable String kode) {
         try {
             regionRepository.deleteById(kode);
+            System.out.println("Region was found and is deleted");
             return ResponseEntity.ok().build();
+
         } catch (Exception exception) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Region not found");
         }
