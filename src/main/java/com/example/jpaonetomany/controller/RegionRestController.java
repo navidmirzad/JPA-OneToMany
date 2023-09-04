@@ -1,7 +1,9 @@
 package com.example.jpaonetomany.controller;
 
+import com.example.jpaonetomany.Model.Kommune;
 import com.example.jpaonetomany.Model.Region;
 import com.example.jpaonetomany.repositories.RegionRepository;
+import com.example.jpaonetomany.service.ApiServiceGetKommuner;
 import com.example.jpaonetomany.service.ApiServiceGetRegioner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,15 +27,22 @@ public class RegionRestController {
 
     @GetMapping("/getregioner")
     public List<Region> getRegioner() {
-        List<Region> ListRegioner = apiServiceGetRegioner.getRegion();
-        return ListRegioner;
+        List<Region> listRegioner = apiServiceGetRegioner.getRegion();
+        return listRegioner;
+    }
+
+    @GetMapping("/regionkommune/{regionKode}")
+    public List<String> getKommunerForRegion(@PathVariable String regionKode) throws Exception {
+        Region region = regionRepository.findById(regionKode)
+                .orElseThrow(() -> new Exception("Region not found with code: " + regionKode));
+        return region.getKommuneNavne();
     }
 
     // add PostMapping for Regioner
 
     // add PutMapping for Regioner
 
-    @DeleteMapping("/region/{kode}")
+    @DeleteMapping("/deleteregion/{kode}")
     public ResponseEntity<String> deleteRegion(@PathVariable String kode) {
         try {
             regionRepository.deleteById(kode);
