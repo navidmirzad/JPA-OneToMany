@@ -3,6 +3,7 @@ package com.example.jpaonetomany.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,7 +28,6 @@ public class Region {
                 .map(Kommune::getNavn)
                 .collect(Collectors.toList());
     }
-
 
     public String getKode() {
         return kode;
