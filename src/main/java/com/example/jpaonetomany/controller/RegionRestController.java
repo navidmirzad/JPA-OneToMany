@@ -29,13 +29,6 @@ public class RegionRestController {
         return listRegioner;
     }
 
-    @GetMapping("/regionkommune/{regionKode}")
-    public List<String> getKommunerForRegion(@PathVariable String regionKode) throws Exception {
-        Region region = regionRepository.findById(regionKode)
-                .orElseThrow(() -> new Exception("Region not found with code: " + regionKode));
-        return region.getKommuneNavne();
-    }
-
     @PostMapping("/region")
     public ResponseEntity<Region> postRegion(@RequestBody Region region) {
         Region savedRegion = regionRepository.save(region);
@@ -70,5 +63,26 @@ public class RegionRestController {
         }
     }
 
+    @GetMapping("/regioner")
+    public List<Region> getRegionerRepos() {
+        return regionRepository.findAll();
+    }
+
+    @GetMapping("/kommunenavne/{kode}")
+    public List<String> getKommuneNavne(@PathVariable String kode) {
+        return apiServiceGetRegioner.getKommuneNavne(kode);
+    }
+
+    @DeleteMapping("/region/{kode}")
+    public ResponseEntity<String> deleteKommune(@PathVariable String kode) {
+        Optional<Region> region = regionRepository.findById(kode);
+        if (region.isPresent()) {
+            regionRepository.deleteById(kode);
+            return ResponseEntity.ok("Region deleted");
+        } else {
+            //return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Region not found");
+        }
+    }
 
 }
